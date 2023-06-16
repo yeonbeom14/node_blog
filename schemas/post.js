@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
     required: true,
   },
   password: {
-    type: Number,
+    type: String,
     required: true,
   },
   title: {
