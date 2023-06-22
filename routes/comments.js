@@ -54,9 +54,12 @@ router.get("/posts/:postId/comments", async (req, res) => {
 
         const commentList = comments.map((comment) => {
             return {
+                commentId: comment._id,
+                userId: comment.userId,
                 nickname: comment.nickname,
                 comment: comment.comment,
-                createdAt: comment.createdAt
+                createdAt: comment.createdAt,
+                updatedAt: comment.updatedAt
             };
         });
 

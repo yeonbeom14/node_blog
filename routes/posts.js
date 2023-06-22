@@ -39,9 +39,12 @@ router.get("/posts", async (req, res) => {
 
     const postList = posts.map((post) => {
       return {
-        title: post.title,
+        postId: post.postId,
+        userId: post.userId,
         nickname: post.nickname,
-        createdAt: post.createdAt
+        title: post.title,
+        createdAt: post.createdAt,
+        updatedAt: post.updatedAt
       };
     });
 
@@ -63,10 +66,13 @@ router.get("/posts/:postId", async (req, res) => {
     if (detailPost) {
       return res.json({
         post: {
-          title: detailPost.title,
+          postId: detailPost.postId,
+          userId: detailPost.userId,
           nickname: detailPost.nickname,
-          createdAt: detailPost.createdAt,
+          title: detailPost.title,
           content: detailPost.content,
+          createdAt: detailPost.createdAt,
+          updatedAt: detailPost.updatedAt
         }
       });
     } else {
