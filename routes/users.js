@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const User = require("../schemas/user");
+const User = require("../schemas/user.js");
 
 // 회원가입 API
 router.post("/signup", async (req, res) => {
@@ -12,26 +12,21 @@ router.post("/signup", async (req, res) => {
 
     try {
         if (!nicknameReg.test(nickname)) {
-            res.status(412).json({ errorMessage: "닉네임의 형식이 일치하지 않습니다." });
-            return;
+            return res.status(412).json({ errorMessage: "닉네임의 형식이 일치하지 않습니다." });
         }
         if (password !== confirm) {
-            res.status(412).json({ errorMessage: "패스워드가 일치하지 않습니다." });
-            return;
+            return res.status(412).json({ errorMessage: "패스워드가 일치하지 않습니다." });
         }
         if (!passwordReg.test(password)) {
-            res.status(412).json({ errorMessage: "패스워드 형식이 일치하지 않습니다." });
-            return;
+            return res.status(412).json({ errorMessage: "패스워드 형식이 일치하지 않습니다." });
         }
         if (password.includes(nickname)) {
-            res.status(412).json({ errorMessage: "패스워드에 닉네임이 포함되어 있습니다." });
-            return;
+            return res.status(412).json({ errorMessage: "패스워드에 닉네임이 포함되어 있습니다." });
         }
 
         const existsUsers = await User.findOne({ nickname });
         if (existsUsers) {
-            res.status(412).json({ errorMessage: "중복된 닉네임입니다." });
-            return;
+            return res.status(412).json({ errorMessage: "중복된 닉네임입니다." });
         }
 
         const user = new User({ nickname, password });
