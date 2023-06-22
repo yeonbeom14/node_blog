@@ -134,7 +134,7 @@ router.delete("/posts/:postId", authMiddleware, async (req, res) => {
 
     await Post.deleteOne({ _id: postId });
     // 삭제할 postId 해당 게시글에 달린 댓글 전체 삭제
-    await Comment.deleteMany({ postid: postId });
+    await Comment.deleteMany({ postId });
 
     return res.status(200).json({ message: "게시글을 삭제하였습니다." });
   } catch (err) {
